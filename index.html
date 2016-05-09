@@ -185,7 +185,8 @@ github fork-->
 								<div class="container">
 									<h2>Contact Me</h2>
 <!-- 									<p>Integer eu ante ornare amet commetus vestibulum blandit integer in curae ac faucibus integer non. Adipiscing cubilia elementum integer. Integer eu ante ornare amet commetus.</p> --> 
-									<form method="post" action="Emailform.php">
+									 <!-- action="Emailform.php" -->
+									<form id="contactForm" method="post">
 										<div class="row uniform">
 											<div class="6u 12u(xsmall)"><input type="text" name="name" id="name" placeholder="Name" /></div>
 											<div class="6u 12u(xsmall)"><input type="email" name="email" id="email" placeholder="Email" /></div>
@@ -209,7 +210,21 @@ github fork-->
 							</section>
 					</div>
 
-				<!-- Footer -->
+					<!-- Modal -->
+					<div id="myModal" class="modal">
+					  <!-- Modal content -->
+					  <div class="modal-content">
+					    <div class="modal-header">
+					      <span class="close">×</span>
+					      <h2 id="modalTitle"></h2>
+					    </div>
+					    <div class="modal-body">
+					      <p id="modalBody" style="margin-top: 2.25em"></p>
+					    </div>
+					  </div>
+					</div>
+
+					<!-- Footer -->
 					<section id="footer">
 						<div class="container">
 							<ul class="copyright">

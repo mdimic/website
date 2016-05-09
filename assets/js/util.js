@@ -584,4 +584,76 @@
 
 	};
 
+	/* CONTACT FORM AND MODAL */
+
+	var modal = document.getElementById('myModal');
+
+	// Get the <span> element that closes the modal
+	var span = document.getElementsByClassName("close")[0];
+
+	// When the user clicks on <span> (x), close the modal
+	span.onclick = function() {
+	    modal.style.display = "none";
+	}
+
+	// When the user clicks anywhere outside of the modal, close it
+	window.onclick = function(event) {
+	    if (event.target == modal) {
+	        modal.style.display = "none";
+	    }
+	}	
+
+  	$("#contactForm").submit(function(e) {
+  		console.log("prevented");
+	    e.preventDefault();
+
+	    var email = document.getElementById('email').value;
+	    var subject = document.getElementById('subject').value;
+	    var text = document.getElementById('text').value;
+	    var name = document.getElementById('name').value;
+
+	    if (email.length == 0 || subject.length == 0 || text.length == 0 || name.length == 0) {
+	    	// console.log("Please fill in all fields");
+	    	error("Please fill in all fields");
+	    }
+	    else if (!validateEmail(email)) {
+			// console.log("Please enter a vlid email");
+	    	error("Please enter a valid email");			
+	    }
+	    else {
+	    	// console.log("Valid data");
+			$.ajax({
+				type: 'POST',
+				url: 'Emailform.php',
+				data: $("#contactForm").serialize(),
+				success: function () {
+					success();
+				}
+			});	    
+	    }
+	});
+
+	function error(message) {
+		$('.modal-header').css("background-color","#f2dede");
+		$('#modalTitle').text("Error");
+		$('#modalTitle').css("color","#a94442");
+		$('#modalBody').text(message);
+		document.getElementById('myModal').style.display = "block";
+	}
+
+
+	function success() {
+		$('.modal-header').css("background-color","#dff0d8"); // 5cb85c old green success color	
+		$('#modalTitle').css("color","#3c763d");
+		$('#modalTitle').text("Success");
+		$('#modalBody').text("Thank you for contacting me. I'll get back to you as soon as I can.");
+		$('#contactForm').trigger("reset");
+		document.getElementById('myModal').style.display = "block";
+	}	
+
+	function validateEmail(email) {
+	    var re = /\S+@\S+\.\S+/;
+	    return re.test(email);
+	}
+
 })(jQuery);
