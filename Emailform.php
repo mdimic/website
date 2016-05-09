@@ -6,23 +6,12 @@ if(isset($_POST['email'])) {
   
     $email_to = "milan@mdimic.com";
  
-    $email_subject = "Msililia Contact: Reply";
+    // $email_subject = "Msililia Contact: Reply";
  
-     
- 
-     
  
     function died($error) {
  
-        // your error code can go here
- 
-        // echo "There were error(s) found with the form you submitted.";
- 
-        // echo "These errors appear below.<br /><br />";
- 
         echo $error."<br /><br />";
- 
-        // echo "Please go back and fix these errors.<br /><br />";
  
         die();
  
@@ -47,15 +36,12 @@ if(isset($_POST['email'])) {
      
  
     $name = $_POST['name']; // required
- 
 
     $email_from = $_POST['email']; // required
  
     $subject= $_POST['subject']; // not required
  
     $text = $_POST['text']; // required
- 
-     
  
     $error_message = "";
  
@@ -100,7 +86,6 @@ if(isset($_POST['email'])) {
  
     }
  
-     
  
     $email_message .= "Name: ".clean_string($name)."\n";
   
@@ -108,10 +93,7 @@ if(isset($_POST['email'])) {
  
     $email_message .= "Subject: ".clean_string($subject)."\n";
  
-    $email_message .= "Comments: ".clean_string($text)."\n";
- 
-     
- 
+    $email_message .= "Message: ".clean_string($text)."\n";
      
  
 // create email headers
@@ -122,24 +104,7 @@ $headers = 'From: '.$email_from."\r\n".
  
 'X-Mailer: PHP/' . phpversion();
  
-@mail($email_to, $email_subject, $email_message, $headers);  
- 
-?>
- 
- 
- 
-<!-- include your own success html here -->
- 
- 
-Thanks for contacting me! You'll hear back as soon as possible.
-You will now be redirected to the homepage
-<script type= "text/Javascript">
- window.setTimeout(function(){
-        window.location.href = "/";
-    }, 5000);
-</script>;
- 
-<?php
+@mail($email_to, /*$email_subject*/clean_string($subject), $email_message, $headers);
  
 }
  
